@@ -1,0 +1,41 @@
+AppName: APTPLOT
+Looking for additional jar files matching: C:\Program Files\AptPlot\lib\ext\*.jar
+No External Jars
+Application Args: 
+  C:\Users\Andrea\Desktop\Hdf5Manager\HDF5 File\ds1.bin
+
+Found JVM specified in launch.cfg: C:\Program Files\AptPlot\.bvm
+JRE path is C:\Program Files\AptPlot\.bvm
+
+JVM path is C:\Program Files\AptPlot\.bvm\bin\client\jvm.dll
+
+server
+JVM path is C:\Program Files\AptPlot\.bvm\bin\server\jvm.dll
+
+JVM path is C:\Program Files\AptPlot\.bvm\bin\server\jvm.dll
+
+Initializing the virtual machine.
+
+JavaVM args:
+  version 0x00010002, 
+  nOptions is 2
+ -Djava.class.path=C:\Program Files\AptPlot\lib\aptplot.jar;C:\Program Files\AptPlot\lib\batik_all.jar;C:\Program Files\AptPlot\lib\jh.jar;C:\Program Files\AptPlot\lib\pdfbox.jar;C:\Program Files\AptPlot\lib\xalan-2.6.0.jar;C:\Program Files\AptPlot\lib\freehep-base.jar;C:\Program Files\AptPlot\lib\freehep-graphics2d.jar;C:\Program Files\AptPlot\lib\freehep-graphicsio.jar;C:\Program Files\AptPlot\lib\freehep-graphicsio-emf.jar;C:\Program Files\AptPlot\lib\freehep-graphicsio-ps.jar;C:\Program Files\AptPlot\lib\xmlgraphics-commons.jar;
+ -Dsun.java.command=APTPlot
+
+Creating JVM.
+JVM created.
+Searching for the applications main class.
+
+Found the applications main class.
+
+Loading the applications main class.
+
+Loaded the applications main class.
+
+Searching for the applications main() method.
+
+Found the applications main() method.
+
+Building Arg list.
+Calling main() of java class.
+

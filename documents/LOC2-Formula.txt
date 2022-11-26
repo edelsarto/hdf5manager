@@ -1,0 +1,11 @@
+=IF(MID(C1;3;2)="05";"Break";
+IF(OR(MID(C1;3;2)="11";MID(C1;3;2)="12";MID(C1;3;2)="21";MID(C1;3;2)="22");Foglio2!$B$2;
+IF(OR(MID(C1;3;2)="13";MID(C1;3;2)="14";MID(C1;3;2)="23";MID(C1;3;2)="24");Foglio2!$B$3;
+IF(OR(MID(C1;3;2)="15";MID(C1;3;2)="16";MID(C1;3;2)="25";MID(C1;3;2)="26");Foglio2!$B$4;
+IF(OR(MID(C1;3;2)="31";MID(C1;3;2)="32";MID(C1;3;2)="3D";MID(C1;3;2)="83";MID(C1;3;2)="93");Foglio2!$B$5;
+IF(OR(MID(C1;3;2)="33";MID(C1;3;2)="34";MID(C1;3;2)="35";MID(C1;3;2)="36");Foglio2!$B$6;IF(MID(C1;3;2)="3R";Foglio2!$B$7;
+IF(OR(MID(C1;3;2)="37";MID(C1;3;2)="38");Foglio2!$B$8;IF(MID(C1;3;2)="39";Foglio2!$B$9;IF(MID(C1;3;2)="41";Foglio2!$B$10;
+IF(OR(MID(C1;3;2)="40";MID(C1;3;2)="43");Foglio2!$B$11;IF(OR(MID(C1;3;2)="51";MID(C1;3;2)="52");Foglio2!$B$12;
+IF(OR(MID(C1;3;2)="57";MID(C1;3;2)="58");Foglio2!$B$13;IF(OR(MID(C1;3;2)="80";MID(C1;3;2)="82";MID(C1;3;2)="90";MID(C1;3;2)="92");Foglio2!$B$14;
+IF(OR(MID(C1;3;2)="85";MID(C1;3;2)="95");Foglio2!$B$15;IF(OR(MID(C1;3;2)="87";MID(C1;3;2)="97");Foglio2!$B$16;
+"NONE"))))))))))))))))
