@@ -194,8 +194,9 @@ class MainWindow(QMainWindow):
         def GetData(self):
             
             path = widgets.lineEdit_url_1.text() + "/" + (widgets.lineEdit_url_2.text())  + "/" + (widgets.lineEdit_url_3.text())
-            
-            with h5py.File("C:/Users/Andrea/Desktop/HDF5ManagerGithub/HDF5 File/NEW TEST/" + widgets.lineEdit_url_1.text() + ".h5", 'r') as hdf:
+            #C:/Users/Andrea/Desktop/HDF5ManagerGithub/HDF5 File/NEW TEST/
+            #C:\Users\e_del\Documents\hdf5manager\HDF5 File\NEW TEST
+            with h5py.File("C:/Users/e_del/Documents/hdf5manager/HDF5 File/NEW TEST" + widgets.lineEdit_url_1.text() + ".h5", 'r') as hdf:
                 
                 h5file = hdf
                 ds_list_item = h5search.ReadH5File(h5file)
@@ -298,8 +299,8 @@ class MainWindow(QMainWindow):
         def FillTable(dsList, itemSel):               
                 
                 toFillArray = []
-                
-                with h5py.File("C:/Users/Andrea/Desktop/HDF5ManagerGithub/HDF5 File/NEW TEST/" + widgets.lineEdit_url_1.text() + ".h5", 'r') as hdf:
+                #C:/Users/Andrea/Desktop/HDF5ManagerGithub/HDF5 File/NEW TEST/
+                with h5py.File("C:/Users/e_del/Documents/hdf5manager/HDF5 File/NEW TEST" + widgets.lineEdit_url_1.text() + ".h5", 'r') as hdf:
 
                         dsList = h5search.ReadH5File(hdf)
 
@@ -363,7 +364,7 @@ class MainWindow(QMainWindow):
         ### Create file h5 from file url ###
         def CreateH5():
 
-                asyncio.run(h5create.Create("prova_" + time.strftime("%H_%M_%S"), widgets.lineEdit_2.text()))
+                h5create.Create("prova_" + time.strftime("%H_%M_%S"), widgets.lineEdit_2.text())
           
         ### Set column label name with dataset attribute ###
         # def SetHorizontalLabel(path):
