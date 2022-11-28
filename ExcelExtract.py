@@ -40,16 +40,16 @@ def SaveParameters(filename_with_direc):
             i=0
             for param in sheet.iter_rows(min_row=j+1, max_row=j+1, min_col=i+2, max_col=2000):
                 
-                print(" - ", i, " - ")
-                
+                #print(" - ", i, " - ")
+                #print(param)
                 for p in param:
-                    
+                   
                     if(p.value != None): #sheet.cell(row=j+1, column=i+1).value
-                        
+                        #print(p.value)
                         parameterArray.append(p.value)
-                        print("#########################")
-                        print(i, ") ", p.value)
-                        print("#########################")
+                        # print("#########################")
+                        # print(i, ") ", p.value)
+                        # print("#########################")
                         
                     i+=1
             break
@@ -77,7 +77,7 @@ def SaveSensorID(filename_with_direc):
             
             for sensid in sheet.iter_rows(min_row=j+1, max_row=j+1, min_col=i+2, max_col=2000):
                 
-                print(" - ", i, " - ")
+                #print(" - ", i, " - ")
                 
                 for sid in sensid:
                     
@@ -85,9 +85,9 @@ def SaveSensorID(filename_with_direc):
                        and sid.value != "TIME"): #sheet.cell(row=j+1, column=i+1).value
                         
                         sensorIdList.append(sid.value)
-                        print("#########################")
-                        print(i, ") ", sid.value)
-                        print("#########################")
+                        # print("#########################")
+                        # print(i, ") ", sid.value)
+                        # print("#########################")
                         
                     i+=1
             break
@@ -146,7 +146,7 @@ def SaveValuesList(filename_with_direc, sensorid):
                     #if(isinstance(cell.value, numbers.Number) == True):
 
                     array.append(cell.value)
-                    print("##############", i ,") VALUE GET ", cell.value ," ###############")
+                    # print("##############", i ,") VALUE GET ", cell.value ," ###############")
 
     end = time.time()
     #print(array)
@@ -177,7 +177,7 @@ def SaveTimeList(filename_with_direc, sensorid):
                        and cell.value != None):
 
                         array.append(cell.value)
-                        print("##############", i ,") TIME GET ", cell.value ," ###############")
+                        # print("##############", i ,") TIME GET ", cell.value ," ###############")
                         
             break
         

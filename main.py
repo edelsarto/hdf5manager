@@ -195,7 +195,7 @@ class MainWindow(QMainWindow):
             
             path = widgets.lineEdit_url_1.text() + "/" + (widgets.lineEdit_url_2.text())  + "/" + (widgets.lineEdit_url_3.text())
             
-            with h5py.File("C:/Users/Andrea/Desktop/Hdf5Manager/HDF5 File/NEW TEST/" + widgets.lineEdit_url_1.text() + ".h5", 'r') as hdf:
+            with h5py.File("C:/Users/Andrea/Desktop/HDF5ManagerGithub/HDF5 File/NEW TEST/" + widgets.lineEdit_url_1.text() + ".h5", 'r') as hdf:
                 
                 h5file = hdf
                 ds_list_item = h5search.ReadH5File(h5file)
@@ -232,51 +232,51 @@ class MainWindow(QMainWindow):
                         
                         ds = h5py.Dataset(ds.id)
 
-                        if (ds.name != "/Time/TIME"):
+                        # if (ds.name != "/Time/TIME"):
                                 
-                                if(isEmpty):
+                        if(isEmpty):
+                                
+                                filteredDsList.append(str(ds.name)) 
+                                continue
+                        
+                        #togliere spazi e tutte le lettere in lowcase        
+                        for tag in tagList:
+                                
+                                if(absolute):
                                         
-                                       filteredDsList.append(str(ds.name)) 
-                                       continue
-                               
-                                #togliere spazi e tutte le lettere in lowcase        
-                                for tag in tagList:
-                                        
-                                        if(absolute):
+                                        if(tag != None and tag != ""):
                                                 
-                                                if(tag != None and tag != ""):
-                                                        
-                                                        #print("TAG: ", tag, " -- ATTR: " , ds.attrs['PARAMETER'])
-                                                        
-                                                        if(tag + " " == ds.attrs['PARAMETER']
-                                                                or tag == ds.name.split("/")[2]
-                                                                or tag == ds.attrs['LOCATION1']
-                                                                or tag == ds.attrs['LOCATION2']):
-                                                        
-                                                                isAbsolute = True
-                                                        else:
-                                                                isAbsolute = False
-                                                                break
-                                                                
-                                                        #print("IS ABSOLUTE? ", isAbsolute)
-                                        
-                                        else:
+                                                #print("TAG: ", tag, " -- ATTR: " , ds.attrs['PARAMETER'])
                                                 
                                                 if(tag + " " == ds.attrs['PARAMETER']
                                                         or tag == ds.name.split("/")[2]
                                                         or tag == ds.attrs['LOCATION1']
                                                         or tag == ds.attrs['LOCATION2']):
-                                                        
-                                                        filteredDsList.append(str(ds.name))
+                                                
+                                                        isAbsolute = True
+                                                else:
+                                                        isAbsolute = False
                                                         break
-                                
-                                if(isAbsolute):
-                                        
-                                        filteredDsList.append(str(ds.name))
                                                         
-                        else:
+                                                #print("IS ABSOLUTE? ", isAbsolute)
+                                
+                                else:
+                                        
+                                        if(tag + " " == ds.attrs['PARAMETER']
+                                                or tag == ds.name.split("/")[2]
+                                                or tag == ds.attrs['LOCATION1']
+                                                or tag == ds.attrs['LOCATION2']):
+                                                
+                                                filteredDsList.append(str(ds.name))
+                                                break
+                        
+                        if(isAbsolute):
                                 
                                 filteredDsList.append(str(ds.name))
+                                                        
+                        # else:
+                                
+                        #         filteredDsList.append(str(ds.name))
 
                 #widgets.tableWidget_showSearchResult.clear()
                 
@@ -299,7 +299,7 @@ class MainWindow(QMainWindow):
                 
                 toFillArray = []
                 
-                with h5py.File("C:/Users/Andrea/Desktop/Hdf5Manager/HDF5 File/NEW TEST/" + widgets.lineEdit_url_1.text() + ".h5", 'r') as hdf:
+                with h5py.File("C:/Users/Andrea/Desktop/HDF5ManagerGithub/HDF5 File/NEW TEST/" + widgets.lineEdit_url_1.text() + ".h5", 'r') as hdf:
 
                         dsList = h5search.ReadH5File(hdf)
 
@@ -307,29 +307,29 @@ class MainWindow(QMainWindow):
                         taglist = []
 
                         for e in dsList:
-
+                                
                                 if(e.name == itemSel):
 
                                         toFillArray = np.array(e)
 
                                         dsName = e.name
 
-                                        if(dsName != "/Time/TIME"):
+                                        # if(dsName != "/Time/TIME"):
 
-                                                taglist.append(e.attrs['PARAMETER'])
-                                                taglist.append(e.attrs['LOCATION1'])
-                                                taglist.append(e.attrs['LOCATION2'])
-                                                taglist.append(e.attrs['UNIT'])
+                                        taglist.append(e.attrs['PARAMETER'])
+                                        taglist.append(e.attrs['LOCATION1'])
+                                        taglist.append(e.attrs['LOCATION2'])
+                                        taglist.append(e.attrs['UNIT'])
 
-                                        break
+                                        # break
 
-                        if(dsName != "/Time/TIME"):
+                        # if(dsName != "/Time/TIME"):
 
-                                windowLabel = dsName.split("/")[2] + " - { [Param: " + taglist[0] + "] / [L1:" + taglist[1] + "] / [L2: " + taglist[2] + "] / [Unit:" + taglist[3] + "] }"
+                        #         windowLabel = dsName.split("/")[2] + " - { [Param: " + taglist[0] + "] / [L1:" + taglist[1] + "] / [L2: " + taglist[2] + "] / [Unit:" + taglist[3] + "] }"
                         
-                        else:
+                        # else:
 
-                                windowLabel = dsName.split("/")[2]
+                        windowLabel = dsName.split("/")[2]
 
                         indX = 0
                         indY = 0
@@ -344,13 +344,13 @@ class MainWindow(QMainWindow):
 
                         tableTest.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
                         
-                        for y in range(1):
+                        for y in range(2):
 
                                 indX = 0
 
                                 for x in range(toFillArray.shape[0]):
 
-                                        tableTest.setItem(x, 0, QTableWidgetItem(str(toFillArray[x])))
+                                        tableTest.setItem(x, y, QTableWidgetItem(str(toFillArray[x][y])))
                                         
                                         indX += 1
 

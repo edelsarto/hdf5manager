@@ -19,12 +19,14 @@ def Create(h5Name, excelName):#async
     start = time.time()
 
     parameterList = exceldata.SaveParameters(excelName)
+    #print(parameterList)
     parameterListFiltered = FilterParameterList(parameterList)
+    #print(parameterListFiltered)
 
     sensorIdList = exceldata.SaveSensorID(excelName)
     print("END PART1: ", time.time() - start)
     
-    with h5py.File('C:/Users/Andrea/Desktop/Hdf5Manager/HDF5 File/NEW TEST/' + h5Name + '.h5', 'w') as hdf:
+    with h5py.File('C:/Users/Andrea/Desktop/HDF5ManagerGithub/HDF5 File/NEW TEST/' + h5Name + '.h5', 'w') as hdf:
 
         #datasetTemp = h5py.Dataset()
         
@@ -45,9 +47,10 @@ def Create(h5Name, excelName):#async
             
             for j in range(groupList.__len__()):
 
-                testParam = str("/" + parameterList[i + 2])
-                print("PARAM: ", parameterList[i + 2])
-                print("SENSOR ID: ", sensorIdList[i])
+                testParam = str("/" + parameterList[i])
+                
+                #print("PARAM: ", parameterList[i])
+                #print("SENSOR ID: ", sensorIdList[i])
                 
                 valueAndTagList = []
                 tagList = []
@@ -56,8 +59,10 @@ def Create(h5Name, excelName):#async
                 if(groupList[j].name == testParam):
 
                     valueAndTagList = exceldata.SaveValuesList(excelName, sensorIdList[i])
+                    #print(valueAndTagList.pop(0))
+                    
                     timeList = exceldata.SaveTimeList(excelName, sensorIdList[i])
-                    valueAndTagList.pop(0)
+                    #print(timeList.pop(0))
 
                     ind = 0
                     for e in valueAndTagList:
@@ -75,11 +80,13 @@ def Create(h5Name, excelName):#async
                                 
                             break
                     
-
+                    #print("###### ", len(timeList),"--", len(valueAndTagList) ,"######")
+                    
                     for x in range(len(timeList)):
+                        
                         valueTimeList.append([timeList[x], valueAndTagList[x]])
 
-                    print(valueTimeList)
+                    #print(valueTimeList)
 
                     print("END PART3: ", time.time() - start)
                     print("TAGS: ",tagList)
@@ -90,6 +97,8 @@ def Create(h5Name, excelName):#async
                     #PENSARE ANCHE IN CASO DI LOCATION3
                     datasetTemp = groupList[j].create_dataset(sensorIdList[i], data=valueTimeList )
                     datasetTemp = h5py.Dataset(datasetTemp.id)
+                    
+                    tagList.pop(0)
 
                     datasetTemp.attrs.create('PARAMETER', "",None,None)
                     datasetTemp.attrs['PARAMETER'] = tagList[0]
@@ -101,10 +110,19 @@ def Create(h5Name, excelName):#async
                     datasetTemp.attrs['LOCATION2'] = tagList[2]
                     
                     datasetTemp.attrs.create('LOCATION3', "",None,None)
-                    datasetTemp.attrs['LOCATION3'] = ""
+                    datasetTemp.attrs['LOCATION3'] = tagList[3]
 
                     datasetTemp.attrs.create('UNIT', "",None,None)
-                    datasetTemp.attrs['UNIT'] = tagList[3]
+                    datasetTemp.attrs['UNIT'] = tagList[4]
+                    
+                    datasetTemp.attrs.create('RANGEMAX', "",None,None)
+                    datasetTemp.attrs['RANGEMAX'] = tagList[5]
+                    
+                    datasetTemp.attrs.create('RANGEMIN', "",None,None)
+                    datasetTemp.attrs['RANGEMIN'] = tagList[6]
+                    
+                    datasetTemp.attrs.create('ERROR', "",None,None)
+                    datasetTemp.attrs['ERROR'] = tagList[7]
                     
                     #break
         
@@ -120,13 +138,14 @@ def FilterParameterList(parameterArray):
 
     for e in range(parameterArray.__len__()):
 
-        if(e >= 2):
+        #if(e >= 2):
 
-            if(parameterArray[e] != parameterArray[e-1]):
+        if(parameterArray[e] != parameterArray[e-1]):
 
-                parameterArrayFiltered.append(parameterArray[e])     
+            parameterArrayFiltered.append(parameterArray[e])     
 
     return parameterArrayFiltered
 
 ######### MAIN ##########
-Create("Prova_BL-34_" + time.strftime("%H_%M_%S"), "excel/Prova_BL-34.xlsx")
+#Create("Prova_BL-34_" + time.strftime("%H_%M_%S"), "excel/Prova_BL-34.xlsx")
+#print(FilterParameterList(exceldata.SaveParameters("excel/Prova_BL-34.xlsx")))
