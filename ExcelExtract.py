@@ -11,15 +11,17 @@ import time
 
 import numbers
 
-global wb 
+global wb
 
-#filename_with_direc = "excel/Prova_BL-34.xlsx"
+# filename_with_direc = "excel/Prova_BL-34.xlsx"
+
 
 def loadOld(filename_with_direc):
-    
+
     global wb
     ## read the excel file with name
-    wb = openpyxl.load_workbook(filename_with_direc, read_only=True)  
+    wb = openpyxl.load_workbook(filename_with_direc, read_only=True)
+
 
 def SaveParameters(filename_with_direc):
 
@@ -27,37 +29,40 @@ def SaveParameters(filename_with_direc):
 
     sheet = wb[wb.sheetnames[0]]
 
-    #lettura "Parameter"
+    # lettura "Parameter"
     parameterArray = []
-    #parameterArrayFiltered = []
+    # parameterArrayFiltered = []
 
     for j in range(sheet.max_row):
-        #print(j)
-        if(sheet.cell(row=j+1, column=1).value == "Parameter"):
-            
-            print("--- PARAM ROW FOUND --- ", j+1)
-            
-            i=0
-            for param in sheet.iter_rows(min_row=j+1, max_row=j+1, min_col=i+2, max_col=2000):
-                
-                #print(" - ", i, " - ")
-                #print(param)
+        # print(j)
+        if sheet.cell(row=j + 1, column=1).value == "Parameter":
+
+            print("--- PARAM ROW FOUND --- ", j + 1)
+
+            i = 0
+            for param in sheet.iter_rows(
+                min_row=j + 1, max_row=j + 1, min_col=i + 2, max_col=2000
+            ):
+
+                # print(" - ", i, " - ")
+                # print(param)
                 for p in param:
-                   
-                    if(p.value != None): #sheet.cell(row=j+1, column=i+1).value
-                        #print(p.value)
+
+                    if p.value != None:  # sheet.cell(row=j+1, column=i+1).value
+                        # print(p.value)
                         parameterArray.append(p.value)
                         # print("#########################")
                         # print(i, ") ", p.value)
                         # print("#########################")
-                        
-                    i+=1
+
+                    i += 1
             break
             # break
     # print("################# LISTA PARAMETRI ##################")
     # print(parameterArray)
     print("######################### END SAVE PARAM #########################")
     return parameterArray
+
 
 def SaveSensorID(filename_with_direc):
 
@@ -68,127 +73,140 @@ def SaveSensorID(filename_with_direc):
     sheet = wb[wb.sheetnames[0]]
 
     for j in range(sheet.max_row):
-        #print(j)
-        if(sheet.cell(row=j+1, column=1).value == "Sensor ID"):
-            
-            print("--- SENSOR ID ROW FOUND --- ", j+1)
-            
-            i=0
-            
-            for sensid in sheet.iter_rows(min_row=j+1, max_row=j+1, min_col=i+2, max_col=2000):
-                
-                #print(" - ", i, " - ")
-                
+        # print(j)
+        if sheet.cell(row=j + 1, column=1).value == "Sensor ID":
+
+            print("--- SENSOR ID ROW FOUND --- ", j + 1)
+
+            i = 0
+
+            for sensid in sheet.iter_rows(
+                min_row=j + 1, max_row=j + 1, min_col=i + 2, max_col=2000
+            ):
+
+                # print(" - ", i, " - ")
+
                 for sid in sensid:
-                    
-                    if(sid.value != None
-                       and sid.value != "TIME"): #sheet.cell(row=j+1, column=i+1).value
-                        
+
+                    if (
+                        sid.value != None and sid.value != "TIME"
+                    ):  # sheet.cell(row=j+1, column=i+1).value
+
                         sensorIdList.append(sid.value)
                         # print("#########################")
                         # print(i, ") ", sid.value)
                         # print("#########################")
-                        
-                    i+=1
+
+                    i += 1
             break
-                         
+
     print("######################### END SAVE SENSOR ID #########################")
-    
+
     return sensorIdList
+
 
 def SaveCategoryList(filename_with_direc):
 
     loadOld(filename_with_direc)
-    #print(wb.sheetnames)
-    sheet = wb[wb.sheetnames[0]] #SOSTITUIRE ACNHE GLI ALTRI
+    # print(wb.sheetnames)
+    sheet = wb[wb.sheetnames[0]]  # SOSTITUIRE ACNHE GLI ALTRI
 
     categoryList = []
-    
+
     for j in range(sheet.max_row):
-        
-        if(sheet.cell(row=j+1, column=1).value == None):
+
+        if sheet.cell(row=j + 1, column=1).value == None:
             break
-        
-        categoryList.append(sheet.cell(row=j+1, column=1).value)
-        #print(sheet.cell(row=j+1, column=1).value)
-    
-    #print(j)
-    return categoryList         
+
+        categoryList.append(sheet.cell(row=j + 1, column=1).value)
+        # print(sheet.cell(row=j+1, column=1).value)
+
+    # print(j)
+    return categoryList
+
 
 def SaveValuesList(filename_with_direc, sensorid):
 
     start = time.time()
 
     loadOld(filename_with_direc)
-    
-    sheet = wb[wb.sheetnames[0]]
-    
-    array = []
-    #timeArray = []
-    #timeValue = []
-    
-    for i in range(sheet.max_column):
-               
-        if(i > 1 and sheet.cell(row=1, column=i+1).value == None):
-            break
-        
-        if(sensorid == sheet.cell(row=1, column=i+1).value):
-            
-            print("SAVING TIME")
-            #timeArray = SaveTimeList(filename_with_direc, i)
-            
-            print(i, ") SENSOR ID: " + sheet.cell(row=1, column=i+1).value)
 
-            for row in sheet.iter_rows(min_row=1, max_row=2000, min_col=i+1, max_col=i+1):
+    sheet = wb[wb.sheetnames[0]]
+
+    array = []
+    # timeArray = []
+    # timeValue = []
+
+    for i in range(sheet.max_column):
+
+        if i > 1 and sheet.cell(row=1, column=i + 1).value == None:
+            break
+
+        if sensorid == sheet.cell(row=1, column=i + 1).value:
+
+            print("SAVING TIME")
+            # timeArray = SaveTimeList(filename_with_direc, i)
+
+            print(i, ") SENSOR ID: " + sheet.cell(row=1, column=i + 1).value)
+
+            for row in sheet.iter_rows(
+                min_row=1, max_row=2000, min_col=i + 1, max_col=i + 1
+            ):
 
                 for cell in row:
 
-                    #if(isinstance(cell.value, numbers.Number) == True):
+                    # if(isinstance(cell.value, numbers.Number) == True):
 
                     array.append(cell.value)
                     # print("##############", i ,") VALUE GET ", cell.value ," ###############")
 
     end = time.time()
-    #print(array)
-    
+    # print(array)
+
     # print("TERMINATED in ", end - start)
     # for i in range(len(timeArray)):
     #     timeValue.append([timeArray[i], array[i]])
-    
+
     # print(timeValue)
     print("################### END VALUES SAVE ##################")
     return array
 
+
 def SaveTimeList(filename_with_direc, sensorid):
-    
+
     loadOld(filename_with_direc)
-    
+
     sheet = wb[wb.sheetnames[0]]
 
     array = []
-    
+
     for i in range(sheet.max_column):
-        
-        if(sheet.cell(row=1, column=i+1).value == sensorid):
-            
-            for column in sheet.iter_rows(min_row=1, max_row=2000, min_col=i, max_col=i):
+
+        if sheet.cell(row=1, column=i + 1).value == sensorid:
+
+            for column in sheet.iter_rows(
+                min_row=1, max_row=2000, min_col=i, max_col=i
+            ):
                 for cell in column:
-                    if(isinstance(cell.value, numbers.Number) == True
-                       and cell.value != None):
+                    if (
+                        isinstance(cell.value, numbers.Number) == True
+                        and cell.value != None
+                    ):
 
                         array.append(cell.value)
                         # print("##############", i ,") TIME GET ", cell.value ," ###############")
-                        
+
             break
-        
+
     print("################### END TIME SAVE ##################")
     return array
-    
-################################## MAIN ###################################################                    
-#SaveValuesList("excel/Prova_BL-34.xlsx","PA11")
-#SaveSensorID("excel/Prova_BL-34.xlsx")
-#SaveTimeList("excel/Prova_BL-34.xlsx", "PA11")
-#SaveCategoryList("excel/Prova_BL-34.xlsx")
-#SaveParameters("excel/Prova_BL-34.xlsx")
-#TestIter("excel/Prova_BL-34.xlsx", "PA11")#funzione giusta
-#print(SaveSensorID("excel/Prova_BL-34.xlsx"))
+
+
+################################## MAIN ###################################################
+# SaveValuesList("excel/Prova_BL-34.xlsx","PA11")
+# SaveSensorID("excel/Prova_BL-34.xlsx")
+# SaveTimeList("excel/Prova_BL-34.xlsx", "PA11")
+# SaveCategoryList("excel/Prova_BL-34.xlsx")
+# SaveParameters("excel/Prova_BL-34.xlsx")
+# TestIter("excel/Prova_BL-34.xlsx", "PA11")#funzione giusta
+# print(SaveSensorID("excel/Prova_BL-34.xlsx"))

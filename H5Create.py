@@ -43,9 +43,9 @@ def Create(h5Name, excelName):#async
             groupList.append(hdf.create_group(parameterListFiltered[i]))
             
         #DATASET
-        for i in range(sensorIdList.__len__()):
+        for i in range(len(sensorIdList)):
             
-            for j in range(groupList.__len__()):
+            for j in range(len(groupList)):
 
                 testParam = str("/" + parameterList[i])
                 
@@ -110,7 +110,7 @@ def Create(h5Name, excelName):#async
                     datasetTemp.attrs['LOCATION2'] = tagList[2]
                     
                     datasetTemp.attrs.create('LOCATION3', "",None,None)
-                    
+
                     if tagList[3] != None:
                         datasetTemp.attrs['LOCATION3'] = tagList[3]
 
@@ -149,5 +149,5 @@ def FilterParameterList(parameterArray):
     return parameterArrayFiltered
 
 ######### MAIN ##########
-#Create("Prova_BL-34_" + time.strftime("%H_%M_%S"), "excel/Prova_BL-34.xlsx")
+Create("Prova_BL-34_" + time.strftime("%H_%M_%S"), "excel/Prova_BL-34.xlsx")
 #print(FilterParameterList(exceldata.SaveParameters("excel/Prova_BL-34.xlsx")))
