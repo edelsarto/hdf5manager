@@ -20,7 +20,7 @@ def loadOld(filename_with_direc):
 
     global wb
     ## read the excel file with name
-    wb = openpyxl.load_workbook(filename_with_direc, read_only=True)
+    wb = openpyxl.load_workbook(filename_with_direc, read_only=True, data_only=True)
 
 
 def SaveParameters(filename_with_direc):

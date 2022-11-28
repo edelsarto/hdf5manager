@@ -70,6 +70,9 @@ class AnotherWindow(QWidget):
 
         self.setWindowTitle(windowTitle)
 
+        self.setMinimumWidth(50)
+        self.resize(250,500)
+
         layout.addWidget(table)
         layout.addWidget(self.label)
 
@@ -211,7 +214,7 @@ class MainWindow(QMainWindow):
             # C:/Users/Andrea/Desktop/HDF5ManagerGithub/HDF5 File/NEW TEST/
             # C:\Users\e_del\Documents\hdf5manager\HDF5 File\NEW TEST
             with h5py.File(
-                "C:/Users/e_del/Documents/hdf5manager/HDF5 File/NEW TEST"
+                "C:/Users/e_del/Documents/hdf5manager/HDF5 File/NEW TEST/"
                 + widgets.lineEdit_url_1.text()
                 + ".h5",
                 "r",
@@ -325,7 +328,7 @@ class MainWindow(QMainWindow):
             toFillArray = []
             # C:/Users/Andrea/Desktop/HDF5ManagerGithub/HDF5 File/NEW TEST/
             with h5py.File(
-                "C:/Users/e_del/Documents/hdf5manager/HDF5 File/NEW TEST"
+                "C:/Users/e_del/Documents/hdf5manager/HDF5 File/NEW TEST/"
                 + widgets.lineEdit_url_1.text()
                 + ".h5",
                 "r",
@@ -349,17 +352,21 @@ class MainWindow(QMainWindow):
                         taglist.append(e.attrs["PARAMETER"])
                         taglist.append(e.attrs["LOCATION1"])
                         taglist.append(e.attrs["LOCATION2"])
+                        taglist.append(e.attrs["LOCATION3"])
                         taglist.append(e.attrs["UNIT"])
+                        taglist.append(e.attrs["RANGEMAX"])
+                        taglist.append(e.attrs["RANGEMIN"])
+                        taglist.append(e.attrs["ERROR"])
 
                         # break
 
                 # if(dsName != "/Time/TIME"):
-
-                #         windowLabel = dsName.split("/")[2] + " - { [Param: " + taglist[0] + "] / [L1:" + taglist[1] + "] / [L2: " + taglist[2] + "] / [Unit:" + taglist[3] + "] }"
+                #print(type(taglist[0]) )
+                windowLabel = dsName.split("/")[2] + " - { [Param: " + taglist[0] + "] / [L1:" + taglist[1] + "] / [L2: " + taglist[2] + "] / [L3:" + taglist[3] + "] / [UNIT:" + taglist[4] + "] / [RANGEMAX:" + f"{taglist[5]}" + "] / [RANGEMIN:" + f"{taglist[6]}" + "] / [ERROR:" + taglist[7] + "] }"
 
                 # else:
 
-                windowLabel = dsName.split("/")[2]
+                #windowLabel = dsName.split("/")[2]
 
                 indX = 0
                 indY = 0
