@@ -2291,7 +2291,7 @@ background-repeat: no-repeat;</string>
                               <rect>
                                <x>0</x>
                                <y>0</y>
-                               <width>737</width>
+                               <width>224</width>
                                <height>218</height>
                               </rect>
                              </property>
@@ -2808,7 +2808,7 @@ background-repeat: no-repeat;</string>
                      <property name="geometry">
                       <rect>
                        <x>10</x>
-                       <y>10</y>
+                       <y>50</y>
                        <width>130</width>
                        <height>30</height>
                       </rect>
@@ -2852,7 +2852,7 @@ background-repeat: no-repeat;</string>
                      <property name="geometry">
                       <rect>
                        <x>10</x>
-                       <y>50</y>
+                       <y>90</y>
                        <width>130</width>
                        <height>30</height>
                       </rect>
@@ -2875,7 +2875,7 @@ background-repeat: no-repeat;</string>
                      <property name="geometry">
                       <rect>
                        <x>10</x>
-                       <y>90</y>
+                       <y>130</y>
                        <width>130</width>
                        <height>30</height>
                       </rect>
@@ -3011,7 +3011,7 @@ background-repeat: no-repeat;</string>
                      <property name="geometry">
                       <rect>
                        <x>10</x>
-                       <y>130</y>
+                       <y>170</y>
                        <width>130</width>
                        <height>30</height>
                       </rect>
@@ -3034,7 +3034,7 @@ background-repeat: no-repeat;</string>
                      <property name="geometry">
                       <rect>
                        <x>10</x>
-                       <y>170</y>
+                       <y>210</y>
                        <width>130</width>
                        <height>30</height>
                       </rect>
@@ -3067,6 +3067,50 @@ background-repeat: no-repeat;</string>
                      </property>
                      <property name="text">
                       <string>Absolute</string>
+                     </property>
+                    </widget>
+                    <widget class="QLineEdit" name="lineEdit_url_6">
+                     <property name="enabled">
+                      <bool>true</bool>
+                     </property>
+                     <property name="geometry">
+                      <rect>
+                       <x>10</x>
+                       <y>10</y>
+                       <width>130</width>
+                       <height>30</height>
+                      </rect>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <pointsize>10</pointsize>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                       <underline>false</underline>
+                       <strikeout>false</strikeout>
+                      </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">background-color: rgb(30, 67, 68);
+</string>
+                     </property>
+                     <property name="inputMask">
+                      <string/>
+                     </property>
+                     <property name="text">
+                      <string/>
+                     </property>
+                     <property name="frame">
+                      <bool>true</bool>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                     <property name="placeholderText">
+                      <string extracomment="TEST NAME">Facility</string>
+                     </property>
+                     <property name="cursorMoveStyle">
+                      <enum>Qt::LogicalMoveStyle</enum>
                      </property>
                     </widget>
                    </widget>

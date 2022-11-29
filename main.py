@@ -214,7 +214,7 @@ class MainWindow(QMainWindow):
             # C:/Users/Andrea/Desktop/HDF5ManagerGithub/HDF5 File/NEW TEST/
             # C:\Users\e_del\Documents\hdf5manager\HDF5 File\NEW TEST
             with h5py.File(
-                "C:/Users/e_del/Documents/hdf5manager/HDF5 File/NEW TEST/"
+                "C:/Users/Andrea/Desktop/HDF5ManagerGithub/HDF5 File/NEW TEST/"
                 + widgets.lineEdit_url_1.text()
                 + ".h5",
                 "r",
@@ -327,8 +327,9 @@ class MainWindow(QMainWindow):
 
             toFillArray = []
             # C:/Users/Andrea/Desktop/HDF5ManagerGithub/HDF5 File/NEW TEST/
+            # C:/Users/e_del/Documents/hdf5manager/HDF5 File/NEW TEST/
             with h5py.File(
-                "C:/Users/e_del/Documents/hdf5manager/HDF5 File/NEW TEST/"
+                "C:/Users/Andrea/Desktop/HDF5ManagerGithub/HDF5 File/NEW TEST/"
                 + widgets.lineEdit_url_1.text()
                 + ".h5",
                 "r",

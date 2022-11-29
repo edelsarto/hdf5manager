@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'maingpaXHU.ui'
+## Form generated from reading UI file 'mainoHJYYm.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.2.2
 ##
@@ -1231,7 +1231,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 737, 218))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 224, 218))
         self.scrollAreaWidgetContents.setStyleSheet(u" QScrollBar:vertical {\n"
 "	border: none;\n"
 "    background: rgb(52, 59, 72);\n"
@@ -1422,7 +1422,7 @@ class Ui_MainWindow(object):
         self.lineEdit_url_1 = QLineEdit(self.test)
         self.lineEdit_url_1.setObjectName(u"lineEdit_url_1")
         self.lineEdit_url_1.setEnabled(True)
-        self.lineEdit_url_1.setGeometry(QRect(10, 10, 130, 30))
+        self.lineEdit_url_1.setGeometry(QRect(10, 50, 130, 30))
         font5 = QFont()
         font5.setPointSize(10)
         font5.setBold(False)
@@ -1438,14 +1438,14 @@ class Ui_MainWindow(object):
         self.lineEdit_url_2 = QLineEdit(self.test)
         self.lineEdit_url_2.setObjectName(u"lineEdit_url_2")
         self.lineEdit_url_2.setEnabled(True)
-        self.lineEdit_url_2.setGeometry(QRect(10, 50, 130, 30))
+        self.lineEdit_url_2.setGeometry(QRect(10, 90, 130, 30))
         self.lineEdit_url_2.setStyleSheet(u"background-color: rgb(30, 67, 68);\n"
 "")
         self.lineEdit_url_2.setAlignment(Qt.AlignCenter)
         self.lineEdit_url_3 = QLineEdit(self.test)
         self.lineEdit_url_3.setObjectName(u"lineEdit_url_3")
         self.lineEdit_url_3.setEnabled(True)
-        self.lineEdit_url_3.setGeometry(QRect(10, 90, 130, 30))
+        self.lineEdit_url_3.setGeometry(QRect(10, 130, 130, 30))
         self.lineEdit_url_3.setStyleSheet(u"background-color: rgb(30, 67, 68);\n"
 "")
         self.lineEdit_url_3.setAlignment(Qt.AlignCenter)
@@ -1500,14 +1500,14 @@ class Ui_MainWindow(object):
         self.lineEdit_url_4 = QLineEdit(self.test)
         self.lineEdit_url_4.setObjectName(u"lineEdit_url_4")
         self.lineEdit_url_4.setEnabled(True)
-        self.lineEdit_url_4.setGeometry(QRect(10, 130, 130, 30))
+        self.lineEdit_url_4.setGeometry(QRect(10, 170, 130, 30))
         self.lineEdit_url_4.setStyleSheet(u"background-color: rgb(30, 67, 68);\n"
 "")
         self.lineEdit_url_4.setAlignment(Qt.AlignCenter)
         self.lineEdit_url_5 = QLineEdit(self.test)
         self.lineEdit_url_5.setObjectName(u"lineEdit_url_5")
         self.lineEdit_url_5.setEnabled(True)
-        self.lineEdit_url_5.setGeometry(QRect(10, 170, 130, 30))
+        self.lineEdit_url_5.setGeometry(QRect(10, 210, 130, 30))
         self.lineEdit_url_5.setStyleSheet(u"background-color: rgb(30, 67, 68);\n"
 "")
         self.lineEdit_url_5.setAlignment(Qt.AlignCenter)
@@ -1516,6 +1516,16 @@ class Ui_MainWindow(object):
         self.checkBox_2.setGeometry(QRect(230, 10, 82, 21))
         self.checkBox_2.setAutoFillBackground(False)
         self.checkBox_2.setStyleSheet(u"")
+        self.lineEdit_url_6 = QLineEdit(self.test)
+        self.lineEdit_url_6.setObjectName(u"lineEdit_url_6")
+        self.lineEdit_url_6.setEnabled(True)
+        self.lineEdit_url_6.setGeometry(QRect(10, 10, 130, 30))
+        self.lineEdit_url_6.setFont(font5)
+        self.lineEdit_url_6.setStyleSheet(u"background-color: rgb(30, 67, 68);\n"
+"")
+        self.lineEdit_url_6.setFrame(True)
+        self.lineEdit_url_6.setAlignment(Qt.AlignCenter)
+        self.lineEdit_url_6.setCursorMoveStyle(Qt.LogicalMoveStyle)
         self.stackedWidget.addWidget(self.test)
         self.create_page = QWidget()
         self.create_page.setObjectName(u"create_page")
@@ -1817,6 +1827,9 @@ class Ui_MainWindow(object):
         self.lineEdit_url_4.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Location1", None))
         self.lineEdit_url_5.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Location2", None))
         self.checkBox_2.setText(QCoreApplication.translate("MainWindow", u"Absolute", None))
+        self.lineEdit_url_6.setInputMask("")
+        self.lineEdit_url_6.setText("")
+        self.lineEdit_url_6.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Facility", None))
         self.btn_create.setText(QCoreApplication.translate("MainWindow", u"Create", None))
         self.lineEdit_2.setText("")
         self.lineEdit_2.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type here", None))

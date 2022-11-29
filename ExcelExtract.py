@@ -11,6 +11,8 @@ import time
 
 import numbers
 
+import math
+
 global wb
 
 # filename_with_direc = "excel/Prova_BL-34.xlsx"
@@ -20,7 +22,7 @@ def loadOld(filename_with_direc):
 
     global wb
     ## read the excel file with name
-    wb = openpyxl.load_workbook(filename_with_direc, read_only=True, data_only=True)
+    wb = openpyxl.load_workbook(filename_with_direc, read_only=True, data_only=True)#, data_only=True
 
 
 def SaveParameters(filename_with_direc):
@@ -68,7 +70,7 @@ def SaveSensorID(filename_with_direc):
 
     sensorIdList = []
 
-    loadOld(filename_with_direc)
+    #loadOld(filename_with_direc)
 
     sheet = wb[wb.sheetnames[0]]
 
@@ -107,7 +109,7 @@ def SaveSensorID(filename_with_direc):
 
 def SaveCategoryList(filename_with_direc):
 
-    loadOld(filename_with_direc)
+    #loadOld(filename_with_direc)
     # print(wb.sheetnames)
     sheet = wb[wb.sheetnames[0]]  # SOSTITUIRE ACNHE GLI ALTRI
 
@@ -129,13 +131,11 @@ def SaveValuesList(filename_with_direc, sensorid):
 
     start = time.time()
 
-    loadOld(filename_with_direc)
+    #loadOld(filename_with_direc)
 
     sheet = wb[wb.sheetnames[0]]
 
     array = []
-    # timeArray = []
-    # timeValue = []
 
     for i in range(sheet.max_column):
 
@@ -145,36 +145,28 @@ def SaveValuesList(filename_with_direc, sensorid):
         if sensorid == sheet.cell(row=1, column=i + 1).value:
 
             print("SAVING TIME")
-            # timeArray = SaveTimeList(filename_with_direc, i)
 
             print(i, ") SENSOR ID: " + sheet.cell(row=1, column=i + 1).value)
 
             for row in sheet.iter_rows(
                 min_row=1, max_row=2000, min_col=i + 1, max_col=i + 1
-            ):
+                ):
 
                 for cell in row:
 
-                    # if(isinstance(cell.value, numbers.Number) == True):
-
+                    #print("##############", i ,") VALUE GET ", cell.value ," ###############")
                     array.append(cell.value)
-                    # print("##############", i ,") VALUE GET ", cell.value ," ###############")
 
     end = time.time()
     # print(array)
 
-    # print("TERMINATED in ", end - start)
-    # for i in range(len(timeArray)):
-    #     timeValue.append([timeArray[i], array[i]])
-
-    # print(timeValue)
     print("################### END VALUES SAVE ##################")
     return array
 
 
 def SaveTimeList(filename_with_direc, sensorid):
 
-    loadOld(filename_with_direc)
+    #loadOld(filename_with_direc)
 
     sheet = wb[wb.sheetnames[0]]
 
@@ -201,8 +193,43 @@ def SaveTimeList(filename_with_direc, sensorid):
     print("################### END TIME SAVE ##################")
     return array
 
-
+def SaveAndCalculateUncertainty(filename_with_direc, error):
+    
+    loadOld(filename_with_direc)
+    
+    sheet = sheet = wb[wb.sheetnames[1]]
+    
+    a = 0
+    b = 0
+    c = 0
+    d = 0
+    
+    for i in range(sheet.max_row):
+        
+        if sheet.cell(row=i+1, column=1).value == error:
+             
+            a = sheet.cell(row=i+1, column=2).value
+            b = sheet.cell(row=i+1, column=3).value
+            c = sheet.cell(row=i+1, column=4).value
+            d = sheet.cell(row=i+1, column=5).value
+            
+            break
+    
+    if(a==0
+       and b==0
+       and c==0
+       and d==0):
+        
+        return 0
+    
+    uncertainty = math.sqrt(pow(a,2) + pow(b,2) + pow(c,2) + pow(d,2))
+    
+    print(uncertainty)
+    
+    return uncertainty
+            
 ################################## MAIN ###################################################
+SaveAndCalculateUncertainty("excel/Prova_BL-34.xlsx","01WH")
 # SaveValuesList("excel/Prova_BL-34.xlsx","PA11")
 # SaveSensorID("excel/Prova_BL-34.xlsx")
 # SaveTimeList("excel/Prova_BL-34.xlsx", "PA11")

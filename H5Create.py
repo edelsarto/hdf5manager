@@ -27,8 +27,9 @@ def Create(h5Name, excelName):  # async
     sensorIdList = exceldata.SaveSensorID(excelName)
     print("END PART1: ", time.time() - start)
     # C:/Users/Andrea/Desktop/HDF5ManagerGithub/HDF5 File/NEW TEST/
+    # C:/Users/e_del/Documents/hdf5manager/HDF5 File/NEW TEST/
     with h5py.File(
-        "C:/Users/e_del/Documents/hdf5manager/HDF5 File/NEW TEST/" + h5Name + ".h5", "w"
+        "C:/Users/Andrea/Desktop/HDF5ManagerGithub/HDF5 File/NEW TEST/" + h5Name + ".h5", "w"
     ) as hdf:
 
         # datasetTemp = h5py.Dataset()
@@ -65,15 +66,17 @@ def Create(h5Name, excelName):  # async
                         excelName, sensorIdList[i]
                     )
                     # print(valueAndTagList.pop(0))
+                    #print(valueAndTagList)
 
                     timeList = exceldata.SaveTimeList(excelName, sensorIdList[i])
                     # print(timeList.pop(0))
 
                     ind = 0
+                    catList = exceldata.SaveCategoryList(excelName)
                     for e in valueAndTagList:
                         # print("LEN CAT LIST ", exceldata.SaveCategoryList(excelName).__len__())
-                        if ind <= exceldata.SaveCategoryList(excelName).__len__() - 1:
-
+                        if ind <= len(catList) - 1:
+                            #print(e)
                             tagList.append(e)
                             ind += 1
 
@@ -105,6 +108,7 @@ def Create(h5Name, excelName):  # async
                     datasetTemp = groupList[j].create_dataset(
                         sensorIdList[i], data=valueTimeList
                     )
+                    
                     datasetTemp = h5py.Dataset(datasetTemp.id)
 
                     tagList.pop(0)
@@ -113,10 +117,12 @@ def Create(h5Name, excelName):  # async
                     datasetTemp.attrs["PARAMETER"] = tagList[0]
 
                     datasetTemp.attrs.create("LOCATION1", "", None, None)
-                    datasetTemp.attrs["LOCATION1"] = tagList[1]
+                    if tagList[1] != None:
+                        datasetTemp.attrs["LOCATION1"] = tagList[1]
 
                     datasetTemp.attrs.create("LOCATION2", "", None, None)
-                    datasetTemp.attrs["LOCATION2"] = tagList[2]
+                    if tagList[2] != None:
+                        datasetTemp.attrs["LOCATION2"] = tagList[2]
 
                     datasetTemp.attrs.create("LOCATION3", "", None, None)
 
@@ -124,18 +130,20 @@ def Create(h5Name, excelName):  # async
                         datasetTemp.attrs["LOCATION3"] = tagList[3]
 
                     datasetTemp.attrs.create("UNIT", "", None, None)
-                    datasetTemp.attrs["UNIT"] = tagList[4]
+                    if tagList[4] != None:
+                        datasetTemp.attrs["UNIT"] = tagList[4]
 
                     datasetTemp.attrs.create("RANGEMAX", "", None, None)
-                    datasetTemp.attrs["RANGEMAX"] = tagList[5]
+                    if tagList[5] != None:    
+                        datasetTemp.attrs["RANGEMAX"] = tagList[5]
 
                     datasetTemp.attrs.create("RANGEMIN", "", None, None)
-                    datasetTemp.attrs["RANGEMIN"] = tagList[6]
+                    if tagList[6] != None:
+                        datasetTemp.attrs["RANGEMIN"] = tagList[6]
 
                     datasetTemp.attrs.create("ERROR", "", None, None)
-                    datasetTemp.attrs["ERROR"] = tagList[7]
-
-                    # break
+                    if tagList[7] != None:
+                        datasetTemp.attrs["ERROR"] = tagList[7]
 
     end = time.time()
     print("######################### FINISH #########################")
@@ -149,8 +157,6 @@ def FilterParameterList(parameterArray):
     parameterArrayFiltered = []
 
     for e in range(parameterArray.__len__()):
-
-        # if(e >= 2):
 
         if parameterArray[e] != parameterArray[e - 1]:
 
