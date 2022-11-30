@@ -29,7 +29,7 @@ def Create(h5Name, excelName):  # async
     # C:/Users/Andrea/Desktop/HDF5ManagerGithub/HDF5 File/NEW TEST/
     # C:/Users/e_del/Documents/hdf5manager/HDF5 File/NEW TEST/
     with h5py.File(
-        "C:/Users/Andrea/Desktop/HDF5ManagerGithub/HDF5 File/NEW TEST/" + h5Name + ".h5", "w"
+        "C:/Users/e_del/Documents/hdf5manager/HDF5 File/NEW TEST/" + h5Name + ".h5", "w"
     ) as hdf:
 
         # datasetTemp = h5py.Dataset()

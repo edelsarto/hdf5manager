@@ -30,6 +30,8 @@ import H5Create as h5create
 from modules import *
 from widgets import *
 
+import matplotlib.pyplot as plt
+
 # IMPORT / GUI AND MODULES AND WIDGETS
 
 os.environ["QT_FONT_DPI"] = "96"  # FIX Problem for High DPI and Scale above 100%
@@ -48,8 +50,15 @@ h5file = []
 path = None
 
 
+
+
 class AnotherWindow(QWidget):
+
+    table = None
+
     def __init__(self):
+
+        
         super().__init__()
 
     def AddTable(self, row, column, labelText, windowTitle):
@@ -60,7 +69,16 @@ class AnotherWindow(QWidget):
         layout = QVBoxLayout()
 
         self.label = QLabel(labelText)  # + " % d" % randint(0,10000)
+
+        global table
         table = QTableWidget(row, column)
+
+        plotbutton = QPushButton("PLOT")
+        plotbutton.setObjectName("PLOT")
+        layout.addWidget(plotbutton)
+        print("BUTTON NAME: ", plotbutton.objectName())
+
+        plotbutton.clicked.connect(self.ButtonClicked)
 
         self.setWindowTitle(windowTitle)
 
@@ -71,12 +89,57 @@ class AnotherWindow(QWidget):
         layout.addWidget(self.label)
 
         self.setLayout(layout)
-
+        
         return table
 
-    # def setCentralWidget(a, b):
-    #         return
+    def ButtonClicked(self):
 
+        def PlotTable():
+            
+            #table = QTableWidget()
+            time = []
+
+            if table.itemAt(0, 0) != None:
+
+                for i in range(table.rowCount()):
+                    
+                    item = float(table.item(i,0).text())
+                    
+                    if item != None:
+
+                        # print(i, ")T: ", item)
+
+                        time.append(float(item))
+                
+                value = []
+                for i in range(table.rowCount()):
+
+                    item = float(table.item(i,1).text())
+                    
+                    if item != None:
+
+                        # print(i, ")V: ", item)
+
+                        value.append(float(item))
+
+                plt.figure(self.label.text())
+                # plotting the points 
+                plt.plot(time, value)
+                # naming the x axis
+                plt.xlabel('time - axis')
+                # naming the y axis
+                plt.ylabel('value - axis')
+                # giving a title to my graph
+                plt.title(self.label.text())
+                # function to show the plot
+                plt.show()
+
+        btn = self.sender()
+        btnName = btn.objectName()
+
+        if btnName == "PLOT":
+            print("PLOTTING!!!")
+            PlotTable()
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -205,10 +268,10 @@ class MainWindow(QMainWindow):
                 + widgets.lineEdit_url_1.text()
             )
             # C:/Users/Andrea/Desktop/HDF5ManagerGithub/HDF5 File/NEW TEST/
-            # C:\Users\e_del\Documents\hdf5manager\HDF5 File\NEW TEST
+            # C:/Users/e_del/Documents/hdf5manager/HDF5 File/NEW TEST/
             
             with h5py.File(
-                "C:/Users/Andrea/Desktop/HDF5ManagerGithub/HDF5 File/"
+                "C:/Users/e_del/Documents/hdf5manager/HDF5 File/"
                 + widgets.lineEdit_url_6.text() + "/"
                 + widgets.lineEdit_url_1.text()
                 + ".h5",
@@ -324,7 +387,7 @@ class MainWindow(QMainWindow):
             # C:/Users/Andrea/Desktop/HDF5ManagerGithub/HDF5 File/NEW TEST/
             # C:/Users/e_del/Documents/hdf5manager/HDF5 File/NEW TEST/
             path = (
-                "C:/Users/Andrea/Desktop/HDF5ManagerGithub/HDF5 File/"
+                "C:/Users/e_del/Documents/hdf5manager/HDF5 File/"
                 + widgets.lineEdit_url_6.text() + "/"
                 + widgets.lineEdit_url_1.text()
             )
@@ -504,9 +567,6 @@ class MainWindow(QMainWindow):
 #     print('Mouse click: LEFT CLICK')
 # if event.buttons() == Qt.RightButton:
 #     print('Mouse click: RIGHT CLICK')
-
-def Graph():
-    return
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
