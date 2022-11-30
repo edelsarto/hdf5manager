@@ -5,17 +5,9 @@ import sys
 from asyncio.windows_events import NULL
 import asyncio
 
-# from cgi import test
-# from itertools import count
-# from pathlib import Path
-# from posixpath import split
-# from random import randint
-
 import time
 
 from webbrowser import get
-
-# import keyboard
 
 import h5py
 
@@ -52,6 +44,8 @@ ds_list_item = []
 resultsArray = []
 listItemsSelected = []
 h5file = []
+
+path = None
 
 
 class AnotherWindow(QWidget):
@@ -99,6 +93,8 @@ class MainWindow(QMainWindow):
 
         global widgets
         widgets = self.ui
+        
+        global path
 
         global param_list_item
         global ds_list_item
@@ -205,16 +201,15 @@ class MainWindow(QMainWindow):
         def GetData(self):
 
             path = (
-                widgets.lineEdit_url_1.text()
-                + "/"
-                + (widgets.lineEdit_url_2.text())
-                + "/"
-                + (widgets.lineEdit_url_3.text())
+                widgets.lineEdit_url_6.text() + "/"
+                + widgets.lineEdit_url_1.text()
             )
             # C:/Users/Andrea/Desktop/HDF5ManagerGithub/HDF5 File/NEW TEST/
             # C:\Users\e_del\Documents\hdf5manager\HDF5 File\NEW TEST
+            
             with h5py.File(
-                "C:/Users/Andrea/Desktop/HDF5ManagerGithub/HDF5 File/NEW TEST/"
+                "C:/Users/Andrea/Desktop/HDF5ManagerGithub/HDF5 File/"
+                + widgets.lineEdit_url_6.text() + "/"
                 + widgets.lineEdit_url_1.text()
                 + ".h5",
                 "r",
@@ -328,9 +323,13 @@ class MainWindow(QMainWindow):
             toFillArray = []
             # C:/Users/Andrea/Desktop/HDF5ManagerGithub/HDF5 File/NEW TEST/
             # C:/Users/e_del/Documents/hdf5manager/HDF5 File/NEW TEST/
-            with h5py.File(
-                "C:/Users/Andrea/Desktop/HDF5ManagerGithub/HDF5 File/NEW TEST/"
+            path = (
+                "C:/Users/Andrea/Desktop/HDF5ManagerGithub/HDF5 File/"
+                + widgets.lineEdit_url_6.text() + "/"
                 + widgets.lineEdit_url_1.text()
+            )
+            with h5py.File(
+                path
                 + ".h5",
                 "r",
             ) as hdf:
@@ -505,6 +504,9 @@ class MainWindow(QMainWindow):
 #     print('Mouse click: LEFT CLICK')
 # if event.buttons() == Qt.RightButton:
 #     print('Mouse click: RIGHT CLICK')
+
+def Graph():
+    return
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

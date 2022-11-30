@@ -224,12 +224,12 @@ def SaveAndCalculateUncertainty(filename_with_direc, error):
     
     uncertainty = math.sqrt(pow(a,2) + pow(b,2) + pow(c,2) + pow(d,2))
     
-    print(uncertainty)
+    #print(uncertainty)
     
     return uncertainty
             
 ################################## MAIN ###################################################
-SaveAndCalculateUncertainty("excel/Prova_BL-34.xlsx","01WH")
+# SaveAndCalculateUncertainty("excel/Prova_BL-34.xlsx","01WH")
 # SaveValuesList("excel/Prova_BL-34.xlsx","PA11")
 # SaveSensorID("excel/Prova_BL-34.xlsx")
 # SaveTimeList("excel/Prova_BL-34.xlsx", "PA11")
