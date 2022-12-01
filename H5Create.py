@@ -26,10 +26,12 @@ def Create(h5Name, excelName):  # async
 
     sensorIdList = exceldata.SaveSensorID(excelName)
     print("END PART1: ", time.time() - start)
+    
     # C:/Users/Andrea/Desktop/HDF5ManagerGithub/HDF5 File/NEW TEST/
     # C:/Users/e_del/Documents/hdf5manager/HDF5 File/NEW TEST/
+    
     with h5py.File(
-        "C:/Users/e_del/Documents/hdf5manager/HDF5 File/NEW TEST/" + h5Name + ".h5", "w"
+        "C:/Users/Andrea/Desktop/HDF5ManagerGithub/HDF5 File/" + h5Name + ".h5", "w"
     ) as hdf:
 
         # datasetTemp = h5py.Dataset()
@@ -125,7 +127,6 @@ def Create(h5Name, excelName):  # async
                         datasetTemp.attrs["LOCATION2"] = tagList[2]
 
                     datasetTemp.attrs.create("LOCATION3", "", None, None)
-
                     if tagList[3] != None:
                         datasetTemp.attrs["LOCATION3"] = tagList[3]
 

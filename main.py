@@ -32,6 +32,8 @@ from widgets import *
 
 import matplotlib.pyplot as plt
 
+import threading
+
 # IMPORT / GUI AND MODULES AND WIDGETS
 
 os.environ["QT_FONT_DPI"] = "96"  # FIX Problem for High DPI and Scale above 100%
@@ -49,9 +51,6 @@ h5file = []
 
 path = None
 
-
-
-
 class AnotherWindow(QWidget):
 
     table = None
@@ -65,7 +64,7 @@ class AnotherWindow(QWidget):
 
         # self.ui = Ui_MainWindow()
         # self.ui.setupUi(self)
-
+ 
         layout = QVBoxLayout()
 
         self.label = QLabel(labelText)  # + " % d" % randint(0,10000)
@@ -75,8 +74,11 @@ class AnotherWindow(QWidget):
 
         plotbutton = QPushButton("PLOT")
         plotbutton.setObjectName("PLOT")
+        plotbutton.setFixedWidth(55)
+        
         layout.addWidget(plotbutton)
-        print("BUTTON NAME: ", plotbutton.objectName())
+        
+        #print("BUTTON NAME: ", plotbutton.objectName())
 
         plotbutton.clicked.connect(self.ButtonClicked)
 
@@ -123,15 +125,15 @@ class AnotherWindow(QWidget):
                         value.append(float(item))
 
                 plt.figure(self.label.text())
-                # plotting the points 
+
                 plt.plot(time, value)
-                # naming the x axis
+
                 plt.xlabel('time - axis')
-                # naming the y axis
+
                 plt.ylabel('value - axis')
-                # giving a title to my graph
+
                 plt.title(self.label.text())
-                # function to show the plot
+
                 plt.show()
 
         btn = self.sender()
@@ -271,7 +273,7 @@ class MainWindow(QMainWindow):
             # C:/Users/e_del/Documents/hdf5manager/HDF5 File/NEW TEST/
             
             with h5py.File(
-                "C:/Users/e_del/Documents/hdf5manager/HDF5 File/"
+                "C:/Users/Andrea/Desktop/HDF5ManagerGithub/HDF5 File/"
                 + widgets.lineEdit_url_6.text() + "/"
                 + widgets.lineEdit_url_1.text()
                 + ".h5",
@@ -387,7 +389,7 @@ class MainWindow(QMainWindow):
             # C:/Users/Andrea/Desktop/HDF5ManagerGithub/HDF5 File/NEW TEST/
             # C:/Users/e_del/Documents/hdf5manager/HDF5 File/NEW TEST/
             path = (
-                "C:/Users/e_del/Documents/hdf5manager/HDF5 File/"
+                "C:/Users/Andrea/Desktop/HDF5ManagerGithub/HDF5 File/"
                 + widgets.lineEdit_url_6.text() + "/"
                 + widgets.lineEdit_url_1.text()
             )
