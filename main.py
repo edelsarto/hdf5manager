@@ -132,7 +132,7 @@ class AnotherWindow(QWidget):
 
                 plt.ylabel('value - axis')
 
-                plt.title(self.label.text())
+                # plt.title(self.label.text())
 
                 plt.show()
 
@@ -140,7 +140,7 @@ class AnotherWindow(QWidget):
         btnName = btn.objectName()
 
         if btnName == "PLOT":
-            print("PLOTTING!!!")
+            #print("PLOTTING!!!")
             PlotTable()
 
 class MainWindow(QMainWindow):
