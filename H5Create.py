@@ -144,7 +144,8 @@ def Create(h5Name, excelName):  # async
 
                     datasetTemp.attrs.create("ERROR", "", None, None)
                     if tagList[7] != None:
-                        datasetTemp.attrs["ERROR"] = tagList[7]
+                        datasetTemp.attrs["ERROR"] = exceldata.SaveAndCalculateUncertainty(tagList[7])
+                        print("UNC CALCULATED = ", datasetTemp.attrs["ERROR"])
 
     end = time.time()
     print("######################### FINISH #########################")

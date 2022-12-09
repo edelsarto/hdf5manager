@@ -26,6 +26,7 @@ from PySide6.QtWidgets import (
 
 import H5Search as h5search
 import H5Create as h5create
+import ExcelExtract as ecxcelEx
 
 from modules import *
 from widgets import *
@@ -123,14 +124,16 @@ class AnotherWindow(QWidget):
                         # print(i, ")V: ", item)
 
                         value.append(float(item))
-
-                plt.figure(self.label.text())
+                
+                label = self.label.text()
+                
+                plt.figure(label)
 
                 plt.plot(time, value)
 
-                plt.xlabel('time - axis')
+                plt.xlabel('Time - s')
 
-                plt.ylabel('value - axis')
+                plt.ylabel(label.split("&")[1] + ' - ' + label.split("&")[3])
 
                 # plt.title(self.label.text())
 
@@ -427,7 +430,7 @@ class MainWindow(QMainWindow):
 
                 # if(dsName != "/Time/TIME"):
                 #print(type(taglist[0]) )
-                windowLabel = dsName.split("/")[2] + " - { [Param: " + taglist[0] + "] / [L1:" + taglist[1] + "] / [L2: " + taglist[2] + "] / [L3:" + taglist[3] + "] / [UNIT:" + taglist[4] + "] / [RANGEMAX:" + f"{taglist[5]}" + "] / [RANGEMIN:" + f"{taglist[6]}" + "] / [ERROR:" + taglist[7] + "] }"
+                windowLabel = dsName.split("/")[2] + " - { / [Param: &" + taglist[0] + "&] / [L1:" + taglist[1] + "] / [L2: " + taglist[2] + "] / [L3:" + taglist[3] + "] / [UNIT: &" + taglist[4] + "&] / [RANGEMAX:" + f"{taglist[5]}" + "] / [RANGEMIN:" + f"{taglist[6]}" + "] / [ERROR:" + taglist[7] + "] }"
 
                 # else:
 
@@ -448,7 +451,7 @@ class MainWindow(QMainWindow):
 
                 tableTest.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
 
-                for y in range(2):
+                for y in range(4):
 
                     indX = 0
 

@@ -193,11 +193,11 @@ def SaveTimeList(filename_with_direc, sensorid):
     print("################### END TIME SAVE ##################")
     return array
 
-def SaveAndCalculateUncertainty(filename_with_direc, error):
+def SaveAndCalculateUncertainty(error): #filename_with_direc,
     
-    loadOld(filename_with_direc)
+    #loadOld(filename_with_direc)
     
-    sheet = sheet = wb[wb.sheetnames[1]]
+    sheet = wb[wb.sheetnames[1]]
     
     a = 0
     b = 0
