@@ -117,7 +117,7 @@ class AnotherWindow(QWidget):
                 value = []
                 for i in range(table.rowCount()):
 
-                    item = float(table.item(i,1).text())
+                    item = float(table.item(i,2).text())
                     
                     if item != None:
 
@@ -125,11 +125,35 @@ class AnotherWindow(QWidget):
 
                         value.append(float(item))
                 
+                valueNegativeUncertainty = []
+                for i in range(table.rowCount()):
+
+                    item = float(table.item(i,1).text())
+                    
+                    if item != None:
+
+                        # print(i, ")V: ", item)
+
+                        valueNegativeUncertainty.append(float(item))
+                        
+                valuePositiveUncertainty = []
+                for i in range(table.rowCount()):
+
+                    item = float(table.item(i,3).text())
+                    
+                    if item != None:
+
+                        # print(i, ")V: ", item)
+
+                        valuePositiveUncertainty.append(float(item))
+                
                 label = self.label.text()
                 
                 plt.figure(label)
 
                 plt.plot(time, value)
+                plt.plot(time, valueNegativeUncertainty)
+                plt.plot(time, valuePositiveUncertainty)
 
                 plt.xlabel('Time - s')
 
@@ -424,13 +448,14 @@ class MainWindow(QMainWindow):
                         taglist.append(e.attrs["UNIT"])
                         taglist.append(e.attrs["RANGEMAX"])
                         taglist.append(e.attrs["RANGEMIN"])
-                        taglist.append(e.attrs["ERROR"])
+                        taglist.append(e.attrs["ERROR"])        #7
 
                         # break
 
                 # if(dsName != "/Time/TIME"):
                 #print(type(taglist[0]) )
-                windowLabel = dsName.split("/")[2] + " - { / [Param: &" + taglist[0] + "&] / [L1:" + taglist[1] + "] / [L2: " + taglist[2] + "] / [L3:" + taglist[3] + "] / [UNIT: &" + taglist[4] + "&] / [RANGEMAX:" + f"{taglist[5]}" + "] / [RANGEMIN:" + f"{taglist[6]}" + "] / [ERROR:" + taglist[7] + "] }"
+                print("TAGLIST: ", taglist)
+                windowLabel = dsName.split("/")[2] + " - { / [Param: &" + taglist[0] + "&] / [L1:" + taglist[1] + "] / [L2: " + str(taglist[2]) + "] / [L3:" + taglist[3] + "] / [UNIT: &" + taglist[4] + "&]  / [RANGEMAX:" + f"{str(taglist[5])}" + "] / [RANGEMIN:" + f"{str(taglist[6])}" + "] / [ERROR:" + f"{str(taglist[7])}" + "]}" #
 
                 # else:
 
@@ -446,9 +471,9 @@ class MainWindow(QMainWindow):
                 newWindow.append(self.nw)
 
                 tableTest = self.nw.AddTable(
-                    toFillArray.shape[0], 2, windowLabel, dsName.split("/")[2]
+                    toFillArray.shape[0], 4, windowLabel, dsName.split("/")[2]
                 )
-
+                
                 tableTest.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
 
                 for y in range(4):
@@ -456,10 +481,30 @@ class MainWindow(QMainWindow):
                     indX = 0
 
                     for x in range(toFillArray.shape[0]):
-
-                        tableTest.setItem(
-                            x, y, QTableWidgetItem(str(toFillArray[x][y]))
-                        )
+                        
+                        if y == 0:
+                            
+                             tableTest.setItem(
+                                x, y, QTableWidgetItem(str(toFillArray[x][0]))
+                            )
+                             
+                        elif y == 1:
+                            
+                            tableTest.setItem(
+                                x, y, QTableWidgetItem(str(toFillArray[x][1] - taglist[7]))
+                            )
+                            
+                        elif y == 2:
+                            
+                            tableTest.setItem(
+                                x, y, QTableWidgetItem(str(toFillArray[x][1]))
+                            )
+                        
+                        elif y == 3:
+                            
+                            tableTest.setItem(
+                                x, y, QTableWidgetItem(str(toFillArray[x][1] + taglist[7]))
+                            )
 
                         indX += 1
 
