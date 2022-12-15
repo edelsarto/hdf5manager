@@ -58,39 +58,54 @@ class AnotherWindow(QWidget):
 
     def __init__(self):
 
-        
         super().__init__()
 
     def AddTable(self, row, column, labelText, windowTitle):
-
-        # self.ui = Ui_MainWindow()
-        # self.ui.setupUi(self)
- 
+        
+        #SET WIDGETS VAR
         layout = QVBoxLayout()
 
-        self.label = QLabel(labelText)  # + " % d" % randint(0,10000)
+        self.label = QLabel(labelText)
+        dataList = labelText.split("&")
 
         global table
         table = QTableWidget(row, column)
 
         plotbutton = QPushButton("PLOT")
+        
+        dataArea = QTableWidget(len(dataList), 1)
+        
+        #SET BUTTON PLOT 
         plotbutton.setObjectName("PLOT")
         plotbutton.setFixedWidth(55)
-        
-        layout.addWidget(plotbutton)
-        
-        #print("BUTTON NAME: ", plotbutton.objectName())
-
         plotbutton.clicked.connect(self.ButtonClicked)
-
+        
+        #SET DATA AREA
+        dataArea.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
+        
+        spaceArray = []
+        for i in range(len(dataList)):
+            
+            dataArea.setItem(
+                i, 0, QTableWidgetItem(str(dataList[i]))
+            ) 
+            spaceArray.append(" ")
+            
+        dataArea.setHorizontalHeaderLabels(" ")
+        dataArea.setVerticalHeaderLabels(spaceArray)
+        
+        #SET WINDOW FORMAT
         self.setWindowTitle(windowTitle)
-
         self.setMinimumWidth(50)
         self.resize(250,500)
-
+        
+        #ADD WIDGET CREATED
+        layout.addWidget(plotbutton)
         layout.addWidget(table)
+        layout.addWidget(dataArea)
         layout.addWidget(self.label)
-
+        
+        
         self.setLayout(layout)
         
         return table
@@ -99,18 +114,14 @@ class AnotherWindow(QWidget):
 
         def PlotTable():
             
-            #table = QTableWidget()
-            time = []
-
             if table.itemAt(0, 0) != None:
 
+                time = []
                 for i in range(table.rowCount()):
                     
                     item = float(table.item(i,0).text())
                     
                     if item != None:
-
-                        # print(i, ")T: ", item)
 
                         time.append(float(item))
                 
@@ -121,8 +132,6 @@ class AnotherWindow(QWidget):
                     
                     if item != None:
 
-                        # print(i, ")V: ", item)
-
                         value.append(float(item))
                 
                 valueNegativeUncertainty = []
@@ -132,8 +141,6 @@ class AnotherWindow(QWidget):
                     
                     if item != None:
 
-                        # print(i, ")V: ", item)
-
                         valueNegativeUncertainty.append(float(item))
                         
                 valuePositiveUncertainty = []
@@ -142,8 +149,6 @@ class AnotherWindow(QWidget):
                     item = float(table.item(i,3).text())
                     
                     if item != None:
-
-                        # print(i, ")V: ", item)
 
                         valuePositiveUncertainty.append(float(item))
                 
@@ -158,8 +163,6 @@ class AnotherWindow(QWidget):
                 plt.xlabel('Time - s')
 
                 plt.ylabel(label.split("&")[1] + ' - ' + label.split("&")[3])
-
-                # plt.title(self.label.text())
 
                 plt.show()
 
@@ -455,7 +458,7 @@ class MainWindow(QMainWindow):
                 # if(dsName != "/Time/TIME"):
                 #print(type(taglist[0]) )
                 print("TAGLIST: ", taglist)
-                windowLabel = dsName.split("/")[2] + " - { / [Param: &" + taglist[0] + "&] / [L1:" + taglist[1] + "] / [L2: " + str(taglist[2]) + "] / [L3:" + taglist[3] + "] / [UNIT: &" + taglist[4] + "&]  / [RANGEMAX:" + f"{str(taglist[5])}" + "] / [RANGEMIN:" + f"{str(taglist[6])}" + "] / [ERROR:" + f"{str(taglist[7])}" + "]}" #
+                windowLabel = "&" + dsName.split("/")[2] + "& - { / [Param: &" + taglist[0] + "&] / [L1:&" + taglist[1] + "&] / [L2: &" + str(taglist[2]) + "&] / [L3:&" + taglist[3] + "&] / [UNIT: &" + taglist[4] + "&]  / [RANGEMAX:&" + f"{str(taglist[5])}" + "&] / [RANGEMIN:&" + f"{str(taglist[6])}" + "&] / [ERROR:&" + f"{str(taglist[7])}" + "&]}" #
 
                 # else:
 
