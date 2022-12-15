@@ -1,24 +1,48 @@
+# Matlab version
+# fileID=fopen("./TF01_strip/stripf32_TF01.txt",'r');
+# % data = textscan(fileID,'%s %*[^\n]');
+# data = textscan(fileID,'%s','Delimiter','\n');
+# fclose('all');
+# stringData = string(data{:});
+# for jjj=1:length(stringData)
+#     splitted_string(jjj,:)=split(stringData(jjj));
+#     if jjj>1
+#         for kkk=1:length( splitted_string(jjj,:))
+#             value(jjj-1,kkk)=str2num(splitted_string(jjj,kkk));
+#         end
+#     end
+# end
+
 import numpy as np
 
-#file = open("C:\Users\Andrea\Desktop\HDF5ManagerGithub\documents\SS_BT12_SS30.bin", "rb")
-# file = np.fromfile("C:/Users/Andrea/Desktop/HDF5ManagerGithub/documents/TBM_Relief_0_5m3_e1_area_v1.rst")
+file = open("documents\SS_NOS_TES_TAS_v2_(0.76mg_s)_strip", "r")
 
-# text = ""
-# for i in file:
-#     text += str(i)
-#     print(i)
+#readFile = file.read()
 
-file = open("C:/Users/Andrea/Desktop/HDF5ManagerGithub/documents/TBM_Relief_0_5m3_e1_area_v1.rst", mode="rb")
-binary_data = file.read()
-print(binary_data)
+data = np.loadtxt(file, delimiter='\n', dtype=np.dtype("str"))
 
-for i in binary_data:
-    print(i)
-# text = ""
-# for i in binary_data:
-#     text += str(i)
-#     print(i)
+file.close()
 
-# file = open("C:/Users/Andrea/Desktop/HDF5ManagerGithub/documents/text.txt", "w") 
-# file.write(text) 
-# file.close()
+# print("---------------------------------")
+# print(len(data))
+# print("---------------------------------")
+
+stringData = str(data)
+val = []
+for i in range(len(stringData)):
+    splitted_string = stringData[i].split(" ")
+    print(splitted_string)
+    if i > 1:
+        for j in range(len(splitted_string)):
+            val.append(splitted_string[j])
+            break
+
+print("########################################")
+#print(val)
+print("########################################")
+
+
+
+
+
+#print(data)
