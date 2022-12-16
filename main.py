@@ -67,13 +67,18 @@ class AnotherWindow(QWidget):
 
         self.label = QLabel(labelText)
         dataList = labelText.split("&")
+        
+        cleanDataList = []
+        for i in range(len(dataList)):
+            if i%2 == 0 and dataList[i] != "":
+                cleanDataList.append(dataList[i])
 
         global table
         table = QTableWidget(row, column)
 
         plotbutton = QPushButton("PLOT")
         
-        dataArea = QTableWidget(len(dataList), 1)
+        dataArea = QTableWidget(len(cleanDataList), 2)
         
         #SET BUTTON PLOT 
         plotbutton.setObjectName("PLOT")
@@ -83,16 +88,28 @@ class AnotherWindow(QWidget):
         #SET DATA AREA
         dataArea.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
         
-        spaceArray = []
-        for i in range(len(dataList)):
+        dataArea.setItem(0, 1, QTableWidgetItem("SENSORID"))
+        dataArea.setItem(1, 1, QTableWidgetItem("PARAMETER"))
+        dataArea.setItem(2, 1, QTableWidgetItem("LOCATION1"))
+        dataArea.setItem(3, 1, QTableWidgetItem("LOCATION2"))
+        dataArea.setItem(4, 1, QTableWidgetItem("LOCATION3"))
+        dataArea.setItem(5, 1, QTableWidgetItem("UNIT"))
+        dataArea.setItem(6, 1, QTableWidgetItem("RANGEMAX"))
+        dataArea.setItem(7, 1, QTableWidgetItem("RANGEMIN"))
+        dataArea.setItem(8, 1, QTableWidgetItem("ERROR"))
+        
+        verticalHeaderSpace = []
+        for i in range(len(cleanDataList)):
             
             dataArea.setItem(
-                i, 0, QTableWidgetItem(str(dataList[i]))
+                i, 0, QTableWidgetItem(str(cleanDataList[i]))
             ) 
-            spaceArray.append(" ")
             
-        dataArea.setHorizontalHeaderLabels(" ")
-        dataArea.setVerticalHeaderLabels(spaceArray)
+            verticalHeaderSpace.append(" ")
+        
+        horizontalHeaderSpace = [" ", " "]
+        dataArea.setHorizontalHeaderLabels(horizontalHeaderSpace)
+        dataArea.setVerticalHeaderLabels(verticalHeaderSpace)
         
         #SET WINDOW FORMAT
         self.setWindowTitle(windowTitle)
@@ -162,7 +179,7 @@ class AnotherWindow(QWidget):
 
                 plt.xlabel('Time - s')
 
-                plt.ylabel(label.split("&")[1] + ' - ' + label.split("&")[3])
+                plt.ylabel(label.split("&")[2] + ' - ' + label.split("&")[10])
 
                 plt.show()
 
@@ -458,7 +475,7 @@ class MainWindow(QMainWindow):
                 # if(dsName != "/Time/TIME"):
                 #print(type(taglist[0]) )
                 print("TAGLIST: ", taglist)
-                windowLabel = "&" + dsName.split("/")[2] + "& - { / [Param: &" + taglist[0] + "&] / [L1:&" + taglist[1] + "&] / [L2: &" + str(taglist[2]) + "&] / [L3:&" + taglist[3] + "&] / [UNIT: &" + taglist[4] + "&]  / [RANGEMAX:&" + f"{str(taglist[5])}" + "&] / [RANGEMIN:&" + f"{str(taglist[6])}" + "&] / [ERROR:&" + f"{str(taglist[7])}" + "&]}" #
+                windowLabel = dsName.split("/")[2] + "& - { / [Param: &" + taglist[0] + "&] / [L1:&" + taglist[1] + "&] / [L2: &" + str(taglist[2]) + "&] / [L3:&" + taglist[3] + "&] / [UNIT: &" + taglist[4] + "&]  / [RANGEMAX:&" + f"{str(taglist[5])}" + "&] / [RANGEMIN:&" + f"{str(taglist[6])}" + "&] / [ERROR:&" + f"{str(taglist[7])}" + "&]}" #
 
                 # else:
 
