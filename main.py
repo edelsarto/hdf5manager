@@ -121,8 +121,7 @@ class AnotherWindow(QWidget):
         layout.addWidget(table)
         layout.addWidget(dataArea)
         layout.addWidget(self.label)
-        
-        
+              
         self.setLayout(layout)
         
         return table
